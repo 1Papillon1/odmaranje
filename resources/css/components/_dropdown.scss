@@ -1,0 +1,73 @@
+/*
+    dropdown.scss
+*/
+
+@use '../base/variables' as v;
+
+.dropdown {
+
+
+
+    &__list {
+        position: absolute;
+        background-color: v.$primaryBlockColor;
+        display: none;
+        flex-direction: column;
+        justify-content: left;
+        text-align: left;
+        padding: 1rem 2rem;
+        padding-left: 0;
+        margin: 0;
+        margin-left: -1rem;
+        margin-top: 2vh;
+        list-style: none;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        opacity: 1;
+        display: flex;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+        z-index: 1000;
+        animation: showFromTop 0.3s ease;
+
+    }
+
+   
+
+    &__link {
+        display: block;
+    padding: 10px 20px;
+    color: v.$primaryTextColor;
+    text-decoration: none;
+    font-family: v.$primaryFontFamily;
+    font-size: 16px;
+    
+    background-color: transparent;
+    transition: background-color 0.3s ease;
+    }
+    &__button {
+        background-color: inherit;
+        border: 0;
+        outline: none;
+        padding: 10px 20px;
+        color: v.$primaryTextColor;
+        font-family: v.$primaryFontFamily;
+        font-size: 16px;
+        &:hover {
+            cursor: pointer;
+        }
+    }
+    
+}
+
+@keyframes showFromTop {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+

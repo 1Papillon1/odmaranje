@@ -1,0 +1,109 @@
+/*
+    .container
+*/
+
+@use '../base/variables' as v;
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &--home {
+        margin-left: 20%;
+
+
+    }
+    &__title {
+        font-family: v.$secondaryFontFamily;
+        color: v.$primaryTextColor;
+        font-size: 32px;
+    
+        padding: 0;
+        margin: 0;
+        margin-bottom: 1.5rem;
+    }
+
+    &__subtitle {
+        font-family: v.$secondaryFontFamily;
+        color: v.$mutedTextColor;
+        text-align: left;
+        font-size: 1.2rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    &--choice {
+        width: 100vw;
+        height: 100vh;
+
+    }
+
+    &__gif {
+        height: auto;
+        width: 512px;
+        margin-right: 10vw;
+    }
+
+    &--text {
+
+        &--login {
+            position: absolute;
+            display: block;
+            top: 40%; 
+            left: 70%; 
+            transform: rotate(18deg);
+            font-size: 1.5em; 
+            color: rgb(255, 255, 255);
+            white-space: nowrap; 
+        }
+    }
+
+    
+}
+
+.progress-bar-container {
+    width: 50%; /* Širina progres bara */
+    height: 20px; /* Visina progres bara */
+    background-color: #292929; /* Siva pozadina */
+    padding: 5px;
+    justify-content: left;
+    align-items: left;
+    display: flex;
+    border-radius: 15px;
+    overflow: hidden;
+    margin-top: 20px;
+    position: relative;
+}
+
+.progress-bar {
+    background-color: #727171; /* Zelena boja */
+    transition: width 0.5s ease-in-out; /* Glatki prijelaz */
+    height: 100%;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    vertical-align: middle;
+}
+
+
+@media screen and (max-width: 430px) {
+    .container {
+        &--home {
+            margin-top: 10%;
+            margin-left: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            width: 100%;
+        }
+
+        &__subtitle {
+            margin: 0 1rem;
+            text-align: center;
+        }
+
+        &__title {
+            display: none;
+        }
+    }
+}

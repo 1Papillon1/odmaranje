@@ -1,0 +1,130 @@
+/*
+    buttons.scss
+*/
+
+@use '../base/variables' as v;
+
+.button {
+    background-color: v.$primaryBlockColor;
+    color: v.$primaryTextColor;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.3s ease-in-out;
+    &:hover {
+        background-color: v.$primaryBlockColor;
+        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.322), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+
+        transition: 0.3s;
+        
+    }
+   
+    &--home {
+        width: 40%;
+    }
+    &--medium {
+        background-color: v.$secondaryBlockColor;
+        
+        color: v.$primaryTextColor;
+        border: none;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 24px;
+        width: 20%;
+        
+        cursor: pointer;
+        padding: 1rem 2rem; 
+        border-radius: 10px;
+    }
+
+    &--small {
+        background-color: v.$secondaryBlockColor;
+    color: v.$primaryTextColor;
+    border: none;
+    text-align: center;
+    font-size: 14px;
+    padding: 0.7rem 1.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+    white-space: nowrap; /* Sprečava prelome teksta na dugmetu */
+        
+    }
+
+    &--primary {
+        background-color: v.$secondaryBlockColor;
+        
+        color: v.$primaryTextColor;
+        border: none;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 24px;
+        width: 5rem;
+        
+        cursor: pointer;
+        padding: 1rem 2rem; 
+        border-radius: 10px;
+        transition: all 0.3s ease-in-out;
+        &:hover {
+            background-color: v.$secondaryBlockColor;
+
+            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.322), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+            transition: 0.3s;
+        }
+    }
+
+    &--secondary {
+        background-color: v.$buttonColor;
+        color: v.$primaryTextColor;
+        font-family: v.$secondaryFontFamily;
+        border: none;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        padding: 1rem 2rem; 
+        width: 5rem;
+        font-size: 18px;
+        margin-left: 2rem;
+        cursor: pointer;
+        border-radius: 4px;
+        transition: all 0.3s ease-in-out;
+        &:hover {
+            background-color: v.$buttonColor;
+            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.322), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+            transition: 0.3s;
+        }
+    }
+
+    &--form {
+        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+        width: 100%;
+        box-sizing: border-box;
+       
+        padding: 1rem 0;
+    }
+}
+
+
+@media screen and (max-width: 430px) {
+    .button {
+        &--primary {
+            width: 80%;
+            
+        }
+
+        &--secondary {
+            width: 80%;
+            margin-left: 0;
+            
+        }
+        &--form {
+
+            width: 100%;
+        }
+    }
+}

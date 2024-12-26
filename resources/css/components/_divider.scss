@@ -1,0 +1,34 @@
+/*
+    divider.scss
+*/
+
+@use '../base/variables' as v;
+
+
+
+.divider {
+    display: none;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    &__hr {
+        width: 40%;
+        height: 1px;
+        background-color: v.$mutedTextColor;
+        margin: 0;
+    }
+    &__or {
+        font-family: v.$secondaryFontFamily;
+        color: v.$mutedTextColor;
+        font-size: 1.2rem;
+        margin: 0 1rem;
+    }
+}
+
+@media screen and (max-width: 430px) {
+    .divider {
+        display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 98%;
+    }
+}

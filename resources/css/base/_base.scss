@@ -1,0 +1,11 @@
+/*
+    base.scss
+*/
+
+@forward 'variables';
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #292929;
+}

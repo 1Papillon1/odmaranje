@@ -1,0 +1,19 @@
+/*
+    icons.scss
+*/
+
+.material-icons {
+    &--arrow-right {
+        font-size: 56px;
+    }
+    &--arrow-down {
+        font-size: 48px;
+        margin-right: 1rem;
+        margin-top: 2.5rem;
+
+        color: #ffffff;
+        position: relative;
+        float: right;
+        right: 0;
+    }
+}

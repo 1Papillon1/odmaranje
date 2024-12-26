@@ -1,0 +1,300 @@
+/*
+card.scss
+*/
+
+@use '../base/variables' as v;
+
+.card {
+    margin: 2vh 2vw;
+    background-color: rgba(49, 49, 49, 0.90);
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 5px;
+    width: 96vw;
+    
+
+    &__form {
+        margin: 5% 35%;
+    }
+
+    &__icon {
+        width: 70%;
+        height: auto;
+        margin: 0 auto;
+        display: block;
+    }
+
+    // for login and register
+    &--full {
+        
+        width: 30vw;
+        margin: 10vh 0;
+        border-radius: 15px;
+        display: flex;
+        justify-content: center;
+        
+    }
+
+    &--layout {
+        margin-left: 2%;
+        width: 96%;
+        min-height: 86vh;
+        height: auto;  
+        overflow: hidden; 
+        box-sizing: border-box;
+        padding: 1rem;
+        
+    }
+
+    
+
+    &__title {
+        font-family: v.$secondaryFontFamily;
+        font-size: 24px;
+        color: v.$primaryTextColor;
+        text-align: center;
+        display: block;
+        
+    }
+
+    &__subtitle {
+        font-family: v.$secondaryFontFamily;
+        font-size: 18px;
+        color: v.$mutedTextColor;
+        text-align: center;
+        display: block;
+    }
+
+    
+
+    &__text {
+        font-family: v.$secondaryFontFamily;
+        font-size: 18px;
+        color: v.$mutedTextColor;
+        text-align: center;
+    }
+
+    &__button {
+    
+            background-color: v.$secondaryBlockColor;
+            
+            color: v.$primaryTextColor;
+            border: none;
+            text-align: center;
+            text-decoration: none;
+            display: block;
+            font-size: 24px;
+            width: 100%;
+            
+            cursor: pointer;
+            padding: 1rem 2rem; 
+            border-radius: 10px;
+            transition: all 0.3s ease-in-out;
+            &:hover {
+                background-color: v.$secondaryBlockColor;
+    
+                box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.322), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+                transition: 0.3s;
+            }
+        
+
+    }
+
+    &__box {
+        &--stats {
+            position: relative;
+            width: 40%;
+            max-width: 40%;
+            bottom: 10%;
+        }
+
+        &--coins {
+            margin-top: 0;
+            width: 50%;
+        }
+    }
+
+   
+}
+
+.slider {
+    position: relative;
+    max-width: 90%;
+    height: auto;
+    margin: 0 auto;
+    overflow: hidden;
+
+&__logo {
+    text-align: center;
+    font-size: 48px;
+}
+
+    &__group {
+        position: absolute;
+        // right position top of parent
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        right: 2rem;
+        top: 2rem;
+       width: 30%;
+    }
+
+    &__dialog {
+        
+        width: 80%;
+        height: 10%;
+        text-align: right;
+        border-radius: 5px;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+
+        // &--text
+        // %--energy (icon)
+        // center text and icon so they in the same row and color
+        &__text {
+            text-align: center;
+            color: v.$primaryTextColor;
+            font-family: v.$secondaryFontFamily;
+            font-size: 18px;
+        }
+        &__energy {
+            text-align: center;
+            color: v.$primaryTextColor;
+            font-family: v.$secondaryFontFamily;
+            font-size: 18px;
+        }
+    }
+
+    &__items {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        height: 400px;
+        margin-top: 2rem;
+        transform-style: preserve-3d;
+        transition: transform 0.6s ease;
+    }
+    &__item {
+        position: absolute;
+        
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        opacity: 0; // Neaktivne stavke su nevidljive
+        transition: opacity 0.6s ease, transform 0.6s ease;
+        z-index: 0; // Niži z-index za neaktivne stavke
+    }
+    
+    &__item--active {
+        opacity: 1; // Aktivna stavka je vidljiva
+        z-index: 1; // Viši z-index za aktivnu stavku
+        transform: translate(-50%, -50%) scale(1.1); // Fokus na aktivnu stavku
+    }
+
+    &__title {
+        font-size: 1.5rem;
+        text-align: center;
+    }
+
+    
+    &__desc {
+        font-size: 1rem;
+        text-align: center;
+    }
+    &__nav {
+        position: absolute; // Da se elementi pozicioniraju u odnosu na slider
+        top: 50%; // Centriranje vertikalno
+        left: 0; // Početak na levom rubu slidera
+        width: 100%; // Proširuje se po celoj širini
+        display: flex;
+        justify-content: space-between; // Strelice na suprotnim krajevima
+        
+        align-items: center;
+        z-index: 5; // Da budu iznad slider__items
+
+        &__button {
+         
+            border: none;
+            position: relative;
+            color: #fff;
+            z-index: 3;
+            margin-top: 20%;
+            background-color: transparent;
+            border-radius: 50%;
+
+            &--right {
+                float: right;
+            }
+
+            &:hover {
+                opacity: 0.8; // Efekat na hover
+                cursor: pointer;
+            }
+
+          
+
+            
+        }
+    }
+
+    &__icon {
+        width: 48px; // Veličina ikona
+        height: auto;
+        
+        &--right {
+            transform: rotate(180deg);
+            z-index: 10;
+        }
+    }
+
+    
+
+}
+
+@media only screen and (min-width: 1201px) and (max-width: 1600px) {
+    .card {
+        
+        &--full {
+            width: 40vw;
+        }
+
+       
+    }
+} 
+
+
+ @media only screen and (min-width: 601px) and (max-width: 1200px) {
+    .card {
+        width: 50vw;
+        &--full {
+            width: 50vw;
+        }
+
+        &--layout {
+            width: 96%;
+        }
+
+        &__form {
+            margin: 0 20%;
+        }
+    }
+} 
+
+// media for mobile phones set width to 100%
+@media only screen and (max-width: 600px) {
+    .card {
+        width: 96vw;
+        &--full {
+            width: 96vw;
+            height: 96vh;
+            margin: 2vh 2vw;
+        }
+        &--layout {
+            width: 96%;
+        }
+        &__form {
+            margin: 0;
+        }
+    }
+}

@@ -1,0 +1,22 @@
+/*
+    alerts.scss
+*/
+
+@use '../base/variables' as v;
+
+.alert {
+    margin-top: 40px;
+    padding: 5px 15px;
+    margin-bottom: 20px;
+    
+
+    font-family: v.$secondaryFontFamily;
+    font-size: 16px;
+
+    &--message {
+        background-color: rgb(100, 100, 32);
+        color: v.$primaryTextColor;
+        border-radius: 15px;
+        border-top-left-radius: 15px;
+    }
+}

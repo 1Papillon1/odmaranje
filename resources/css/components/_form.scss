@@ -1,0 +1,198 @@
+/*
+    form.scss
+*/
+
+@use '../base/variables' as v;
+
+.form {
+    background-color: v.$primaryBlockColor;
+    width: 20%;
+
+    // for login and register
+    &--full {
+        padding: 2rem;
+        background-color: inherit;
+        border-radius: 15px;
+        width: 100%;
+    }
+
+    &__title {
+        font-family: v.$secondaryFontFamily;
+        color: v.$primaryTextColor;
+        text-align: center;
+        margin-bottom: 1.5rem;
+    }
+
+    &__group {
+        margin-bottom: 1.5rem;
+        &--links {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        &--centered {
+            text-align: center;
+        }
+
+        &--inline {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    }
+
+    &__text {
+        font-family: v.$secondaryFontFamily;
+        color: v.$secondaryTextColor;
+        margin-bottom: 0.5rem;
+    }
+
+    &__link {
+        color: v.$mutedTextColor;
+        text-decoration: none;
+        font-family: v.$secondaryFontFamily;
+        text-align: center;
+        width: 100%;
+    }
+
+    &__label {
+        font-family: v.$secondaryFontFamily;
+        color: v.$secondaryTextColor;
+        display: block;
+        margin-bottom: 0.5rem;
+    }
+
+    &__input {
+        width: 100%;
+        box-sizing: border-box;
+        overflow: hidden;
+        padding: 0.75rem;
+        font-family: v.$secondaryFontFamily;
+        font-size: 1rem;
+        color: v.$primaryTextColor;
+        background-color: v.$primaryBlockColor;
+        border: 1px solid v.$secondaryBlockColor;
+        border-radius: 4px;
+        transition: border 0.3s ease;
+
+        &:focus {
+            border-color: v.$primaryTextColor;
+            outline: none;
+        }
+
+        &--60 {
+            width: 60%;
+        }
+
+        &--disabled {
+            width: 60%;
+            color: v.$mutedTextColor;
+        }
+
+        
+
+    }
+
+    &__logo {
+        position: absolute;
+        bottom: 1rem;
+        left: 50%; 
+        transform: translateX(-50%); 
+        margin: 0;
+        font-size: 72px; 
+        color: v.$primaryBlockColor; 
+        text-align: center;
+        width: 100%; 
+        text-shadow: 0 0 3px rgba(0, 0, 0, 0.5); 
+        -webkit-text-stroke: 1px #29292957;
+    }
+
+    &__hr {
+        flex-grow: 1;
+        border: none; 
+        border-top: 1px solid v.$mutedTextColor; 
+        margin: 0; 
+    }
+
+    &__or {
+        padding: 0 1rem;
+        white-space: nowrap;
+        font-size: 16px; 
+        color: v.$primaryTextColor;
+        font-family: v.$secondaryFontFamily;
+    }
+
+    &__actions {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__error {
+        color: red;
+        margin-top: 1rem;
+        font-family: v.$secondaryFontFamily;
+        display: block;
+    }
+
+}
+
+
+.input-group {
+    display: flex;
+    align-items: center; /* Poravnaj unos i dugme po vertikali */
+    gap: 0.5rem; /* Razmak između inputa i dugmeta */
+    & .form__input {
+        flex: 1; /* Input zauzima preostali prostor */
+        padding: 0.5rem; /* Unutrašnji razmak */
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+}
+
+
+@media only screen and (min-width: 601px) and (max-width: 1200px) {
+    .form {
+        width: 80vw;
+        &--full {
+            width: 80vw;
+        }
+        &__input {
+            width: 100%;
+        }
+        &__logo {
+            bottom: 2rem;
+            padding: 0;
+
+        }
+    }
+
+    
+}
+
+// media for mobile phones set width to 100%
+@media only screen and (max-width: 600px) {
+    .form {
+        width: 96vw;
+        &--full {
+            width: 96vw;
+            &__input {
+                width: 100%;
+            }
+        }
+        &__logo {
+            bottom: 2rem;
+        }
+    }
+}
+
+@media only screen and (max-width: 430px) {
+    .form {
+        &__group {
+            width: 100%;
+        }
+        &__logo {
+            bottom: 2rem;
+        }
+    }
+}

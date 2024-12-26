@@ -1,0 +1,216 @@
+/*
+    flex.scss
+*/
+
+
+@use '../base/variables' as v;
+
+.flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 70vh;
+
+    &--col--1 {
+        flex-direction: column; 
+        justify-content: flex-start;
+        align-items: center; 
+        
+    }
+
+    &--col--2 {
+        flex-direction: row; 
+        justify-content: center;
+        flex-wrap: wrap; 
+        margin-left: 20%;
+        margin-right: 20%;
+    }
+
+    &__box {
+        width: 30%;
+        background-color: v.$primaryBlockColor;
+        border-radius: 5px;
+        padding: 2rem 4rem;
+        margin: 1rem;
+        height: 30%;
+
+        &--primary {
+            width: 80%;
+            
+        }
+
+        &--secondary {
+            width: 80%;
+            padding: 2rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            background-color: v.$primaryBlockColor;
+            border-radius: 5px;
+            vertical-align: middle;
+            font-family: v.$secondaryFontFamily;
+            font-size: 18px;
+            color: v.$primaryTextColor;
+            height: fit-content;
+        }
+
+        &__icon {
+            position: absolute;
+            margin-left: 30%;
+            
+
+            box-sizing: border-box;
+            
+        }
+
+        &--achievement {
+            background-color: #636363;
+        }
+
+        & p {
+            font-family: v.$secondaryFontFamily;
+            font-size: 18px;
+            color: v.$primaryTextColor;
+        }
+
+        &--coins {
+            margin-top: 0;
+        }
+    }
+
+   
+
+    &--column {
+        text-align: left;
+        align-items: flex-start;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        margin-top: -10%;
+        margin-bottom: 2%;
+    
+    }
+
+
+    &--row {
+        width: fit-content;
+        height: fit-content;
+        justify-content: space-between;
+        flex-direction: row ;
+    }
+    &__hr {
+        width: 20px;
+    }
+
+    &--full {
+        height: 100vh;
+        width: 100vw;
+        // place content some place up
+        justify-content: flex-start;
+       
+    }
+    &--home {
+        height: 100vh;
+        width: 100vw;
+      
+    
+        // place left
+        align-items: flex-start;
+
+        
+        background-color: v.$primaryBlockColor;
+    
+    }
+    &--text {
+        position: relative;
+        text-decoration: none;
+        font-family: v.$secondaryFontFamily;
+        margin: 1rem;
+            font-size: 32px;
+            font-weight: 700;
+
+        &--login {
+            color: v.$primaryTextColor;
+            font-family: v.$primaryFontFamily;
+            font-size: 32px;
+            font-weight: 700;
+            &:hover {
+                color: v.$secondaryTextColor;
+                transition: 0.3s;
+              
+            }
+        }
+        &--register {
+            color: v.$secondaryTextColor;
+            font-family: v.$primaryFontFamily;
+            font-size: 32px;
+            font-weight: 700;
+            &:hover {
+                color: v.$primaryTextColor;
+                transition: 0.3s;
+                
+            }
+        }
+
+
+    }
+
+}
+
+@media screen and (min-width: 884px) {
+    .flex {
+        &--row {
+            flex-direction: column;
+            width: 100%;
+        }
+
+        &--col--2 {
+            justify-content: flex-start;
+            margin-left: 0;
+            margin-right: 0;
+        }
+    }
+}
+
+@media screen and (min-width: 431px) and (max-width: 883px) {
+    .flex {
+        &--row {
+            flex-direction: column;
+            width: 100%;
+            
+            
+        }
+
+        &--col--2 {
+            margin-left: 0;
+            margin-right: 0;
+        }
+    }
+}
+
+
+
+@media screen and (max-width: 430px) {
+    .flex {
+        &--row {
+            margin-top: 1rem;
+            flex-direction: column;
+            width: 100%;
+            gap: 2rem;
+        }
+
+        &--col--2 {
+            margin-left: 0;
+            margin-right: 0;
+
+
+           
+
+        }
+
+        &__box {
+            padding: 1rem 2rem;
+            width: 80%;
+        }
+    }
+}
