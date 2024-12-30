@@ -1,6 +1,6 @@
 @if (auth()->user())
 
-{{-- dodaj glavni div u livewire3 inače ne radi --}}
+
 <div>
 
 <nav class="navigation">
@@ -12,7 +12,7 @@
             <span class="hamburger__icon__line"></span>
         </div>
 
-        <!-- Panel -->
+      
         <div 
             class="panel" 
             :class="{ 'panel--active': isOpen }"
@@ -20,12 +20,12 @@
             @click.away="isOpen = false"
             x-transition.opacity.duration.300ms
         >
-            <!-- Close Button -->
+            
             <button class="panel__close" @click="isOpen = false">
                 <img src="/images/close.svg" alt="close" class="panel__close__icon">
             </button>
 
-            <!-- Panel Content -->
+           
             <ul class="panel__list">
                 <h3 class="panel__heading">
                     Hi, {{ $username }}
@@ -35,30 +35,46 @@
                         Activity
                     </a>
                 </li>
-
-               
+                <li class="panel__item">
+                    <a href="{{ route('user.profile') }}" class="panel__link">
+                        Profile
+                    </a>
+                </li>
+               <li class="panel__item">
+                    <a href="{{ route('user.rewards') }}" class="panel__link">
+                        Rewards
+                    </a>
+                </li>
 
                 <li class="panel__item">
                     <a href="{{ route('user.faq') }}" class="panel__link">
                         About
                     </a>
                 </li>
-             
                 <li class="panel__item">
                     <a href="{{ route('user.coins') }}" class="panel__link">
-                        Rest bucks
+                        Rest Bucks
                     </a>
                 </li>
+                <li class="panel__item">
+                    <a href="{{ route('user.events') }}" class="panel__link">
+                        Events
+                    </a>
+                </li>
+                <li class="panel__item">
+                    <a href="{{ route('user.roadmap') }}" class="panel__link">
+                        Roadmap
+                    </a>
+                </li>
+                
+               
+                
                 <li class="panel__item">
                     <a href="{{ route('user.achievements') }}" class="panel__link">
                         Achievements
                     </a>
                 </li>
-                <li class="panel__item">
-                    <a href="{{ route('user.profile') }}" class="panel__link">
-                        Update profile
-                    </a>
-                </li>
+
                 <li class="panel__item">
                     <form action="{{ route('logout') }}" method="POST">
                         @csrf
@@ -105,8 +121,11 @@
 
         <ul x-show="dropdownOpen" @click.outside="dropdownOpen = false" class="dropdown__list">
             <li><a href="{{ route('user.profile')}}"  class="dropdown__link">Profile</a></li>
+            <li><a href="{{ route('user.rewards') }}" class="dropdown__link">Rewards</a></li>
             <li><a href="{{ route('user.faq') }}" class="dropdown__link">About</a></li>
             <li><a href="{{ route('user.coins')}}" class="dropdown__link">Rest bucks</a></li>
+            <li><a href="{{ route('user.events') }}" class="dropdown__link">Events</a></li>
+            <li><a href="{{ route('user.roadmap') }}" class="dropdown__link">Roadmap</a></li>
             <li><a href="{{ route('user.achievements')}}"  class="dropdown__link">Achievements</a></li>
             <li>
                 <form action="{{ route('logout') }}" method="POST">
@@ -118,7 +137,7 @@
             
             <li><span class="navigation__text">Hi, {{$username}}</span></li>
         </ul>
-        {{--hamburger--}}
+       
 
 
     <ul class="navigation__list navigation__list--right">

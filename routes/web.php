@@ -24,6 +24,8 @@ Route::middleware(['auth'])->prefix('user')->group(function () {
     Route::get('/coins', [UserController::class, 'coins'])->name('user.coins');
     Route::get('/achievements', [UserController::class, 'achievements'])->name('user.achievements');
     Route::get('/events', [UserController::class, 'events'])->name('user.events');
+    Route::get('/roadmap', [UserController::class, 'roadmap'])->name('user.roadmap');
+    Route::get('/rewards', [UserController::class, 'rewards'])->name('user.rewards');
     Route::get('/calendar', [UserController::class, 'calendar'])->name('user.calendar');
     Route::get('/faq', [UserController::class, 'faq'])->name('user.faq');
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout'); 

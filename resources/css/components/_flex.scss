@@ -75,7 +75,19 @@
             height: fit-content;
             min-height: auto;
         }
+
+        &--event {
+            width: 80%;
+        }
         
+        &--reward {
+            position: relative;
+            height: 10rem;
+            min-height: 10rem;
+            width: 10%;
+            padding: 1rem 2rem;
+            
+        }
 
         &__icon {
             position: absolute;
@@ -119,7 +131,9 @@
         width: fit-content;
         height: fit-content;
         justify-content: space-between;
-        flex-direction: row ;
+        flex-direction: row;
+        flex-wrap: wrap;
+        margin-right: 20%;
     }
     &__hr {
         width: 20px;
@@ -182,11 +196,7 @@
 
 @media screen and (min-width: 884px) {
     .flex {
-        &--row {
-            flex-direction: column;
-            width: 100%;
-        }
-
+       
         &--col--2 {
             justify-content: flex-start;
             margin-left: 0;
@@ -197,12 +207,7 @@
 
 @media screen and (min-width: 431px) and (max-width: 883px) {
     .flex {
-        &--row {
-            flex-direction: column;
-            width: 100%;
-            
-            
-        }
+       
 
         &--col--2 {
             margin-left: 0;
