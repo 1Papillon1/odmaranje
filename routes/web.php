@@ -5,11 +5,10 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 
-// Početna stranica za goste
-    Route::get('/', [AuthController::class, 'home'])->name('guest.home');
+Route::get('/', [AuthController::class, 'home'])->name('guest.home');
 
 
-// Gost rute
+
 Route::prefix('guest')->group(function () {
     
     Route::get('/login', [AuthController::class, 'showLoginForm'])->name('guest.login');
@@ -18,13 +17,14 @@ Route::prefix('guest')->group(function () {
     Route::post('/register', [AuthController::class, 'register'])->name('guest.register-post');
 });
 
-// Korisničke rute (zaštitene 'auth' middleware-om)
 Route::middleware(['auth'])->prefix('user')->group(function () {
     Route::get('/', [UserController::class, 'index'])->name('user.dashboard');
-    Route::get('/stats', [UserController::class, 'stats'])->name('user.stats');
     Route::get('/profile', [UserController::class, 'profile'])->name('user.profile');
+    Route::get('/notifications', [UserController::class, 'notifications'])->name('user.notifications');
     Route::get('/coins', [UserController::class, 'coins'])->name('user.coins');
     Route::get('/achievements', [UserController::class, 'achievements'])->name('user.achievements');
+    Route::get('/events', [UserController::class, 'events'])->name('user.events');
+    Route::get('/calendar', [UserController::class, 'calendar'])->name('user.calendar');
     Route::get('/faq', [UserController::class, 'faq'])->name('user.faq');
-    Route::post('/logout', [AuthController::class, 'logout'])->name('logout'); // Ova ruta omogućena za autentifikovane korisnike
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout'); 
 });

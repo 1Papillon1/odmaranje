@@ -48,7 +48,7 @@ class AuthController extends Controller
             // Ako e-mail postoji, pokušaj prijavu
             if (Auth::attempt($credentials)) {
                 $request->session()->regenerate();
-                return redirect()->route('user.dashboard');
+                return redirect()->route('user.profile');
             }
     
             // Ako lozinka nije tačna
@@ -74,27 +74,34 @@ class AuthController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|confirmed|min:8',
+            'email' => 'required|email|unique:users|max:255',
+            'password' => [
+                'required',
+                'string',
+                'min:8',
+                'confirmed',
+                'regex:/[a-z]/',      // must include at least one lowercase letter
+                'regex:/[A-Z]/',      // must include at least one uppercase letter
+                'regex:/[0-9]/',      // must include at least one digit
+            ],
+        ], [
+            'password.regex' => 'The password must include at least one lowercase letter, one uppercase letter, and one digit.',
         ]);
-
+    
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'energy' => 0,
             'password' => Hash::make($request->password),
         ]);
-
-        // roles
+    
+        // Attach default role and achievement
         $user->roles()->attach(1);
-
-        // use db user_achievement where achievement id 1
         $user->achievements()->attach(1);
-        
-
+    
         Auth::login($user);
-
-        return redirect()->route('user.dashboard');
+    
+        return redirect()->route('user.profile')->with('success', 'Welcome! Your account has been created.');
     }
 
     // Logout korisnika

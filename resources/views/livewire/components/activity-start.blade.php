@@ -4,11 +4,15 @@
         <div class="slider">
             <!-- Rotating Activities -->
 
+
         
         @session('message')
         <div class="flex flex--card">
-            <div class="alert alert--message">
-                <p class="alert__text">{{ session('message') }}</p>
+            <div x-data="{ isVisible: true }" x-show="isVisible" class="alert alert--message">
+                {{ session('message') }}
+                <button @click="isVisible = false" class="alert__close">
+                    <img src="/images/close.svg" alt="close" class="alert__close__icon">
+                </button>
             </div>
         </div>
         @endsession

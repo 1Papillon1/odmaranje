@@ -6,6 +6,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\Activity;
+use App\Models\Role;
+use App\Models\Notifications;
 
 class User extends Authenticatable
 {
@@ -49,6 +52,10 @@ class User extends Authenticatable
         ];
     }
 
+    public function activities() {
+        return $this->hasMany(Activity::class);
+    }
+
     // roles role_id
     public function roles()
     {
@@ -82,6 +89,57 @@ public function completedActivitiesCountWithName()
         ->where('status', 'completed');
 
 
+}
+
+public function completedAllActivities()
+{
+    
+     $allActivityIds = Activity::pluck('id')->toArray();
+
+     
+     $userTriedActivityIds = UserActivity::where('user_id', auth()->id())->where('status', 'completed')
+         ->pluck('activity_id')
+         ->unique()
+         ->toArray();
+ 
+   
+     return empty(array_diff($allActivityIds, $userTriedActivityIds));
+
+}
+
+public function getSuggestedActivities()
+{
+    $completedCounts = $this->completedActivitiesCount();
+    $energyMultiplier = $this->calculateEnergyMultiplier();
+    $balanceMultiplier = $this->calculateMultiplier();
+
+    // Ako nema završenih aktivnosti, preporuči sve osim "Sleep"
+    if (empty($completedCounts)) {
+        return Activity::where('name', '!=', 'Sleep')->get();
+    }
+
+    // Nađi minimalni broj završenih aktivnosti
+    $lowestCount = min($completedCounts);
+
+    // Nađi aktivnosti koje nisu završene ili imaju najmanji broj završenih puta
+    $suggestedActivities = Activity::whereNotIn('id', array_keys($completedCounts))
+        ->orWhere(function ($query) use ($lowestCount, $completedCounts) { // Dodano $completedCounts u use
+            $query->whereIn('id', array_keys(array_filter($completedCounts, function ($count) use ($lowestCount) {
+                return $count == $lowestCount;
+            })));
+        })
+        ->where('name', '!=', 'Sleep')
+        ->get();
+
+    // Prilagodi preporuke prema energiji i balansu
+    $suggestedActivities = $suggestedActivities->map(function ($activity) use ($energyMultiplier, $balanceMultiplier) {
+        // Prilagodi prednost aktivnosti prema `energy_change` i multiplikatorima
+        $activity->priority_score = ($activity->energy_change * $energyMultiplier) * $balanceMultiplier;
+        return $activity;
+    });
+
+    // Sortiraj aktivnosti po prioritetu (najveći prioritet na početku)
+    return $suggestedActivities->sortByDesc('priority_score')->values();
 }
 
      // Multiplers for rest_bucks
@@ -121,6 +179,9 @@ public function completedActivitiesCountWithName()
          return round($energyMultiplier, 2);
      }
 
+     public function Notifications() {
+        return $this->hasMany(Notifications::class);
+     }
     
 
     

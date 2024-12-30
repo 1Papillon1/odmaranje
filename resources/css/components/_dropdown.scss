@@ -30,9 +30,46 @@
         z-index: 1000;
         animation: showFromTop 0.3s ease;
 
+        &--notifications {
+            margin-top: 3vh;
+            padding: 0;
+            right: 2%;
+            width: 15rem;
+            max-height: 20rem; 
+            overflow-y: auto;
+
+        }
+      
     }
 
-   
+    &__text {
+        color: v.$primaryTextColor;
+        font-family: v.$secondaryFontFamily;
+        font-size: 14px;
+        
+    }
+    &__small {
+        color: v.$mutedTextColor;
+        font-family: v.$secondaryFontFamily;
+        font-size: 12px;
+    }
+
+    &__content {
+        display: flex;
+        flex-direction: column;
+        gap: 0.2rem;
+        padding: 1rem 1.5rem;
+    }
+
+    &__item {
+        &--notifications {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+           border-bottom: 1px solid v.$secondaryBlockColor;
+            
+        }
+    }
 
     &__link {
         display: block;
@@ -44,6 +81,14 @@
     
     background-color: transparent;
     transition: background-color 0.3s ease;
+    &--notification {
+        padding: 0;
+    }
+
+    &--centered {
+        text-align: center;
+    }
+
     }
     &__button {
         background-color: inherit;

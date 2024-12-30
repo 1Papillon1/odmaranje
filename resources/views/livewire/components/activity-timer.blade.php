@@ -8,11 +8,25 @@
                         <img src="/images/energy.svg" alt="energy" class="slider__dialog__energy">
                         <span class="slider__dialog__text">{{ $activity->energy_change }}</span>
                     </div>
+                    @if ($restBucksChange)
+                        <div class="slider__dialog">
+                            
+                            <span class="slider__dialog__text">+ {{ $restBucksChange }} $REST</span>
+                        </div>
+                    @endif
+                     @if ($activity->name == 'Sleep')
+                 
+                        <div class='slider__item slider__item--active'>
+                            
+                            <p class="slider__logo">💤</p>
+                        </div>
+                    @else
                     <div class="slider__item slider__item--active">
                         <img class="image image--listed image--listed--{{ strtolower(str_replace(' ', '_', $activity->name)) }}" 
                              src="{{ asset('images/activities/' . strtolower(str_replace(' ', '_', $activity->name)) . '.svg') }}" 
                              alt="{{ $activity->name }}">
                     </div>
+                    @endif
                 </div>
             </div>
         </div>

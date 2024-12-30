@@ -121,6 +121,19 @@
     &--active {
         background-color: rgba(0, 0, 0, 0.2);
     }
+
+    &__logo {
+            display: none;
+            position: absolute;
+            margin: 0;
+            font-size: 72px; 
+            color: v.$primaryBlockColor; 
+            text-align: center;
+            width: 100%; 
+            text-shadow: 0 0 3px rgba(0, 0, 0, 0.5); 
+            -webkit-text-stroke: 1px #29292957;
+    
+    }
 }
 
 
@@ -165,6 +178,10 @@
         }
         &__list--right {
             display: none
+        }
+
+        &__logo {
+            display: block;
         }
 
         &__list--phone {

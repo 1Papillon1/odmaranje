@@ -35,11 +35,15 @@
                         Activity
                     </a>
                 </li>
+
+               
+
                 <li class="panel__item">
-                    <a href="{{ route('user.stats') }}" class="panel__link">
-                        Stats
+                    <a href="{{ route('user.faq') }}" class="panel__link">
+                        About
                     </a>
                 </li>
+             
                 <li class="panel__item">
                     <a href="{{ route('user.coins') }}" class="panel__link">
                         Rest bucks
@@ -87,13 +91,7 @@
             <span class="navigation__link__text">{{auth()->user()->energy}} / 96</span>
         </a>
     </li>
-      <li>
-            
-            <a href="/user/faq" class="navigation__link navigation__link--primary navigation__link--help">
-            <img src="/images/help.svg" alt="energy" class="navigation__icon navigation__icon--link">
-            
-            </a>
-        </li>
+      
 </ul>
 
 
@@ -106,10 +104,10 @@
         </a>
 
         <ul x-show="dropdownOpen" @click.outside="dropdownOpen = false" class="dropdown__list">
-         <li><a href="{{ route('user.stats')}}" class="dropdown__link">Stats</a></li>
+            <li><a href="{{ route('user.profile')}}"  class="dropdown__link">Profile</a></li>
+            <li><a href="{{ route('user.faq') }}" class="dropdown__link">About</a></li>
             <li><a href="{{ route('user.coins')}}" class="dropdown__link">Rest bucks</a></li>
             <li><a href="{{ route('user.achievements')}}"  class="dropdown__link">Achievements</a></li>
-            <li><a href="{{ route('user.profile')}}"  class="dropdown__link">Update profile</a></li>
             <li>
                 <form action="{{ route('logout') }}" method="POST">
                     @csrf
@@ -132,7 +130,9 @@
             </a>
         </li>
 
-        <li>
+      
+
+         <li>
             <a href="#" class="navigation__link navigation__link--primary navigation__link--rest">
              <img src="/images/rest.svg" alt="rest" class="navigation__icon navigation__icon--link">
             <span class="navigation__link__text">{{auth()->user()->rest_bucks}} $REST</span>
@@ -145,15 +145,48 @@
             <img src="/images/energy.svg" alt="energy" class="navigation__icon navigation__icon--link">
             <span class="navigation__link__text">{{auth()->user()->energy}} / 96</span>
             </a>
+        </li> 
+
+        <li wire:poll.60s="getNotifications">
+            
+            <div x-data="{ dropdownOpen: false }" class="dropdown">
+                <a href="#" class="navigation__link navigation__link--primary navigation__link--help" @click.prevent="dropdownOpen = !dropdownOpen">
+                    <img src="/images/notifications.svg" alt="notifications" class="navigation__icon navigation__icon--link">
+                </a>
+
+                <!-- Dropdown content -->
+             <ul x-show="dropdownOpen" @click.outside="dropdownOpen = false" class="dropdown__list dropdown__list--notifications">
+                @if ($notifications->isEmpty())
+                    <li class="dropdown__item dropdown__item--notifications">
+                        <span class="dropdown__link dropdown__link--centered">
+                            There are no new notifications!
+                        </span>
+                    </li>
+                @else
+                    @foreach ($notifications->take(15) as $notification)
+                        <li class="dropdown__item dropdown__item--notifications">
+                            <div class="dropdown__content">
+                                <a href="#" class="dropdown__link dropdown__link--notification">
+                                    {{ $notification->title }}
+                                </a>
+                                <p class="dropdown__text">{{ $notification->message }}</p>
+                                <small class="dropdown__small">{{ $notification->created_at->diffForHumans() }}</small>
+                            </div>
+                        </li>
+                    @endforeach
+                    @if ($notifications->count() > 10)
+                        <li class="dropdown__item dropdown__item--notifications">
+                            <a href="{{ route('user.notifications') }}" class="dropdown__link dropdown__link--centered">
+                                See All Notifications
+                            </a>
+                        </li>
+                    @endif
+                @endif
+            </ul>
+            </div>
         </li>
 
-        <li>
-            
-            <a href="/user/faq" class="navigation__link navigation__link--primary navigation__link--help">
-            <img src="/images/help.svg" alt="energy" class="navigation__icon navigation__icon--link">
-            
-            </a>
-        </li>
+        
         
      
 

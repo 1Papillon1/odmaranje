@@ -19,4 +19,20 @@ class Activity extends Model
     {
         return $this->belongsToMany(User::class, 'user_activities', 'activity_id', 'user_id');
     }
+
+    public function calculateXP()
+    {
+        $energyChangeFactor = $this->type === 'add' ? 2 : 1;
+
+        $baseXP = $this->duration * $energyChangeFactor;
+
+        if ($this->duration > 120) {
+            $baseXP *= 1.2; 
+        } elseif ($this->duration > 60) {
+            $baseXP *= 1.1; 
+        }
+
+        
+        return round($baseXP);
+    }
 }

@@ -4,7 +4,18 @@
     </div>
     <div class="flex flex--col--1">
 
+        @if ($suggested_activities)
+        <div class="flex__box flex__box--secondary">
+            <span class="text--lg">Suggested activities</span>
+            <span class="text--sm">
 
+                @foreach ($suggested_activities as $activity)
+                    {{ $activity['name'] }}<br>
+                @endforeach
+
+            </span>
+        </div>
+        @endif
 
         
         @foreach ($activities as $activity)
@@ -18,6 +29,15 @@
 
         @endforeach
 
+        <div class="flex__box flex__box--secondary">
+            <span class="text--lg">Coin multiplier</span>
+            <span class="text--sm">x{{ $coin_multiplier }}</span>
+        </div>
+
+        <div class="flex__box flex__box--secondary">
+            <span class="text--lg">Energy multiplier</span>
+            <span class="text--sm">x{{ $energy_multiplier }}</span>
+        </div>
 
 
     </div>

@@ -22,6 +22,8 @@ return Application::configure(basePath: dirname(__DIR__))
         View::composer('*', function ($view) {
             if (Auth::check()) {
                 $view->with('username', Auth::user()->name);
+                $view->with('email', Auth::user()->email);
+                
             }
         });
     })->create();

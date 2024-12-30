@@ -12,6 +12,10 @@ class UserStats extends Component
     public $user_activities;
     public $activities;
 
+    public $coin_multiplier;
+    public $energy_multiplier;
+    public $suggested_activities;
+
     public function mount()
     {
         $this->user = User::find(auth()->id());
@@ -31,6 +35,12 @@ class UserStats extends Component
             ];
         });
 
+      
+        
+        $this->coin_multiplier = $this->user->calculateMultiplier();
+        $this->energy_multiplier = $this->user->calculateEnergyMultiplier();
+
+        $this->suggested_activities = $this->user->getSuggestedActivities();
   
     }
 

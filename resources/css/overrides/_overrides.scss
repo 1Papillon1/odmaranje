@@ -1,0 +1,78 @@
+/*
+    overrides.scss
+*/
+
+@use '../base/variables' as v;
+
+.d-flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    
+    .text-muted {
+        color: v.$mutedTextColor !important;
+        font-family: v.$secondaryFontFamily;
+    }
+}
+
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Razmak između Previous, brojeva i Next */
+    list-style-type: none; /* Uklanja točkice */
+    padding: 0;
+    margin: 1rem 0;
+}
+
+.pagination .page-item {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+}
+
+.pagination:first-child .page-item:first-child {
+    margin-right: 0; /* Pomakni Previous ulijevo */
+}
+
+.pagination:first-child .page-item:last-child {
+    margin-left: 0; /* Pomakni Next udesno */
+}
+
+.pagination .page-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 0.5rem;
+    color: #007bff;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.pagination .page-link:hover {
+    background-color: #e2e6ea;
+    border-color: #c4c8cc;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #007bff;
+    color: #fff;
+    border-color: #007bff;
+    cursor: default;
+}
+
+.pagination .page-item.disabled .page-link {
+    background-color: #f8f9fa;
+    color: #6c757d;
+    border-color: #ddd;
+    cursor: not-allowed;
+}
+
+.d-sm-none {
+    display:none;
+}

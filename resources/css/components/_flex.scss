@@ -5,12 +5,14 @@
 
 @use '../base/variables' as v;
 
+
+
 .flex {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    height: 70vh;
+    
 
     &--col--1 {
         flex-direction: column; 
@@ -33,7 +35,8 @@
         border-radius: 5px;
         padding: 2rem 4rem;
         margin: 1rem;
-        height: 30%;
+        height: auto;
+        min-height: 10rem;
 
         &--primary {
             width: 80%;
@@ -52,7 +55,27 @@
             font-size: 18px;
             color: v.$primaryTextColor;
             height: fit-content;
+            min-height: auto;
         }
+
+        &--article {
+            position: relative;
+            width: 80%;
+            padding: 1rem 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+            background-color: v.$primaryBlockColor;
+            border-radius: 5px;
+      
+            font-family: v.$secondaryFontFamily;
+            font-size: 18px;
+            color: v.$primaryTextColor;
+            height: fit-content;
+            min-height: auto;
+        }
+        
 
         &__icon {
             position: absolute;

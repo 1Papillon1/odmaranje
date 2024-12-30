@@ -15,28 +15,32 @@ class ActivityStart extends Component
         'start' => '$refresh'
     ];
 
+    protected function sendNotification($user, $title, $message, $type)
+    {
+        $user->notifications()->create([
+            'title' => $title,
+            'message' => $message,
+            'type' => $type,
+            'is_read' => false,
+        ]);
+    }
+
     public $activities = [];
     public $currentIndex = 0;
-    public $activeActivityId = null;
+    public $activeActivityId;
     public $restBucksChange = 0;
     public $user;
     
     public function mount()
     {
-        $this->activities = Activity::all(); // Dohvati sve aktivnosti
+        $this->activities = Activity::all(); 
         $this->user = User::find(auth()->id()); 
-        // Provjeri sesiju da li postoji zapamćen activeActivityId
-        $this->activeActivityId = session()->get('activeActivityId', $this->activities[0]->id);
-    
-        // Nađi index trenutne aktivnosti
+        
         $this->currentIndex = $this->activities->search(function ($activity) {
             return $activity->id === $this->activeActivityId;
         });
 
-        if ($this->activeActivityId) {
-            $this->calculateRestBucks($this->activeActivityId);
-        
-        }
+       
        
     }
 
@@ -45,17 +49,20 @@ class ActivityStart extends Component
     public function startActivity()
     {
         $activity = Activity::find($this->activeActivityId);
-
-        
     
         if ($activity) {
-            if ($activity->type == 'add' && auth()->user()->energy + $activity->energy_change > 96) {
+            $user = auth()->user();
+    
+            if ($activity->type == 'add' && $user->energy + $activity->energy_change > 96) {
                 session()->flash('message', 'You cannot start this activity, because your energy is too high');
-            } else if ($activity->type == 'subtract' && auth()->user()->energy - $activity->energy_change < 0) {
+            } else if ($activity->type == 'subtract' && $user->energy - $activity->energy_change < 0) {
                 session()->flash('message', 'You cannot start this activity, because your energy is too low');
             } else {
+
+
+                
                 DB::table('user_activities')->insert([
-                    'user_id' => auth()->id(),
+                    'user_id' => $user->id,
                     'activity_id' => $activity->id,
                     'created_at' => Carbon::now(),
                     'updated_at' => Carbon::now(),
@@ -63,11 +70,19 @@ class ActivityStart extends Component
                     'status' => 'active',
                 ]);
     
+          
+                $this->sendNotification(
+                    $user,
+                    'Activity Started',
+                    "You have started the activity: {$activity->name}.",
+                    'task_started'
+                );
+    
                 session()->flash('message', 'Activity started successfully');
             }
     
-            // Zapamti trenutni activeActivityId u sesiji
-            session()->put('activeActivityId', $this->activeActivityId);
+         
+           
         }
     
         return redirect()->route('user.dashboard');

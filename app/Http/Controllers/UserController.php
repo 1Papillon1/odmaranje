@@ -30,11 +30,13 @@ class UserController extends Controller
         
      }
 
-     public function stats() {
+     public function notifications() 
+     {
         if (!Auth::check()) {
             return redirect()->route('guest.home');
         }
-        return view('user.stats');
+
+        return view('user.notifications');
      }
  
    
@@ -69,6 +71,22 @@ class UserController extends Controller
             return redirect()->route('guest.home');
         }
          return view('user.faq'); 
+     }
+
+     public function calendar() 
+     {
+        if (!Auth::check()) {
+            return redirect()->route('guest.home');
+        }
+         return view('user.calendar');
+     }
+
+     public function events() 
+     {
+        if (!Auth::check()) {
+            return redirect()->route('guest.home');
+        }
+         return view('user.events');
      }
 
 
