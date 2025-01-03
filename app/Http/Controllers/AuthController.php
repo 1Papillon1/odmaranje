@@ -8,14 +8,13 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Carbon\Carbon;
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\DB;
-
+use Log;
 
 
 class AuthController extends Controller
 {
-
- 
 
     public function home() 
     {
@@ -44,62 +43,74 @@ class AuthController extends Controller
             'password' => 'required',
         ]);
     
-        // Pokušaj autentifikacije korisnika
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-    
-            $user = Auth::user();
-            $today = Carbon::today()->toDateString();
-    
-            // Dohvati ili kreiraj dnevnu nagradu
-            $dailyReward = DB::table('daily_rewards')
-                ->where('user_id', $user->id)
-                ->orderBy('reward_date', 'desc')
-                ->first();
-    
-            $streak = 1; // Podrazumevani streak ako nema prethodnih nagrada
-    
-            if ($dailyReward) {
-                // Ako je poslednja nagrada od juče, povećaj streak
-                if (Carbon::parse($dailyReward->reward_date)->diffInDays($today) === 1) {
-                    $streak = min($dailyReward->streak + 1, 7);
-                } elseif (Carbon::parse($dailyReward->reward_date)->diffInDays($today) > 1) {
-                    // Resetuj streak ako nije uzastopno
-                    $streak = 1;
-                }
-    
-                // Ažuriraj dnevnu nagradu
-                DB::table('daily_rewards')
-                    ->where('id', $dailyReward->id)
-                    ->update([
-                        'reward_date' => $today,
-                        'streak' => $streak,
-                        'updated_at' => now(),
-                    ]);
+        
+
+if (Auth::attempt($credentials)) {
+    $request->session()->regenerate();
+
+    $user = Auth::user();
+    $today = Carbon::now();
+
+  
+    $dailyReward = DB::table('daily_rewards')
+        ->where('user_id', $user->id)
+        ->orderBy('reward_date', 'desc')
+        ->first();
+
+    $streak = 1; 
+    $canClaimReward = false;
+
+    if ($dailyReward) {
+        $lastRewardDate = Carbon::parse($dailyReward->reward_date);
+
+        if ($lastRewardDate->diffInHours($today) >= 24) {
+            $canClaimReward = true;
+
+          
+            if ($lastRewardDate->isYesterday()) {
+                $streak = min($dailyReward->streak + 1, 7);
             } else {
-                // Kreiraj novu nagradu ako ne postoji nijedna
-                DB::table('daily_rewards')->insert([
-                    'user_id' => $user->id,
-                    'reward_date' => $today,
+               
+                $streak = 1;
+            }
+
+          
+            DB::table('daily_rewards')
+                ->where('id', $dailyReward->id)
+                ->update([
+                    'reward_date' => $today->toDateTimeString(),
                     'streak' => $streak,
-                    'created_at' => now(),
                     'updated_at' => now(),
                 ]);
-            }
-    
-            // Dodaj nagradu korisniku
-            $rewards = [10, 20, 30, 40, 50, 60, 70];
-            $restBucks = $rewards[$streak - 1];
-            $user->increment('rest_bucks', $restBucks);
-    
-            // Preusmjeri korisnika na profilnu stranicu
-            return redirect()->route('user.profile');
         }
-    
-        // Ako autentifikacija nije uspjela, provjeri postoji li korisnik s ovim e-mailom
-        if (User::where('email', $request->email)->exists()) {
-            return back()->withErrors(['password' => 'The password is incorrect.'])->withInput();
-        }
+    } else {
+      
+        $canClaimReward = true;
+
+        DB::table('daily_rewards')->insert([
+            'user_id' => $user->id,
+            'reward_date' => $today->toDateTimeString(),
+            'streak' => $streak,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+    }
+
+    if ($canClaimReward) {
+
+        $rewards = [10, 20, 30, 40, 50, 60, 70];
+        $restBucks = $rewards[$streak - 1];
+        $user->increment('rest_bucks', $restBucks);
+    }
+
+
+    return redirect()->route('user.profile');
+}
+
+
+if (User::where('email', $request->email)->exists()) {
+    return back()->withErrors(['password' => 'The password is incorrect.'])->withInput();
+}
     
         // Ako korisnik s ovim e-mailom ne postoji
         return back()->withErrors(['email' => 'The email does not exist.'])->withInput();
@@ -126,9 +137,9 @@ class AuthController extends Controller
                 'string',
                 'min:8',
                 'confirmed',
-                'regex:/[a-z]/',      // must include at least one lowercase letter
-                'regex:/[A-Z]/',      // must include at least one uppercase letter
-                'regex:/[0-9]/',      // must include at least one digit
+                'regex:/[a-z]/',      
+                'regex:/[A-Z]/',   
+                'regex:/[0-9]/',   
             ],
         ], [
             'password.regex' => 'The password must include at least one lowercase letter, one uppercase letter, and one digit.',
@@ -161,8 +172,6 @@ class AuthController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        $request->session()->flush();
-
         return redirect()->route('guest.home');
     }
 }

@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
+use LogViewer; //alias za \Opcodes\LogViewer\Facades\LogViewer
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -19,6 +21,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        
+        // bez middlware autorizacije - dozvola za sve
+
+        LogViewer::auth(function () {
+            // Omogućuje pristup svim zahtjevima bez autorizacije
+            return true;
+        });
     }
 }

@@ -18,6 +18,8 @@ class EventsTableSeeder extends Seeder
                 'name' => 'Rest App Launch',
                 'description' => 'We are launching the Rest App! Join us for an exciting event.',
                 'reward' => 100,
+                'start_time' => now()->addDays(7),
+                'end_time' => now()->addDays(14),
                 'created_at' => now(),
                 'updated_at' => now(),
             ],

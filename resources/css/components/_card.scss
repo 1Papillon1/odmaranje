@@ -6,7 +6,7 @@ card.scss
 
 .card {
     margin: 2vh 2vw;
-    background-color: rgba(49, 49, 49, 0.90);
+    background-color: v.$primaryBlockColor;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
     border-radius: 5px;
     width: 96vw;
@@ -26,7 +26,7 @@ card.scss
     // for login and register
     &--full {
         
-        width: 30vw;
+        width: 20vw;
         margin: 10vh 0;
         border-radius: 15px;
         display: flex;
@@ -37,7 +37,7 @@ card.scss
     &--layout {
         margin-left: 2%;
         width: 96%;
-        min-height: 86vh;
+        min-height: 96vh;
         height: auto;  
         
         box-sizing: border-box;
@@ -58,7 +58,10 @@ card.scss
             font-size: 18px;
             padding: 0;
             margin: 0;
-            padding-top: 1rem;
+            padding: 1rem;
+            width: 100%;
+            text-align: left;
+
         }
         
     }
@@ -281,7 +284,7 @@ card.scss
     .card {
         
         &--full {
-            width: 40vw;
+            width: 30vw;
         }
 
        
@@ -293,7 +296,7 @@ card.scss
     .card {
         width: 50vw;
         &--full {
-            width: 50vw;
+            width: 40vw;
         }
 
         &--layout {

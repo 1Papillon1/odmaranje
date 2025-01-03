@@ -6,10 +6,10 @@ panel.scss
 
 .panel {
     display: none;
-    background-color: #292929;
+    background-color: v.$primaryBlockColor;
     width: 90vw;
     height: 100vh;
-    position: absolute;
+    position: fixed;
     margin: 0;
     padding: 2vh 1vw;
     top: 0;
@@ -62,7 +62,7 @@ panel.scss
         border-radius: 5px;
         cursor: pointer;
         transition: all 0.3s ease-in-out;
-       
+        z-index: 3
     }
 
 
@@ -73,10 +73,10 @@ panel.scss
         position: absolute;
         bottom: 0.1rem;
         width: 100%;
-       
+        z-index: 2;
         &__heading {
-            text-shadow: 0 0 3px rgba(0, 0, 0, 0.5); 
-        -webkit-text-stroke: 1px #29292957;
+            text-shadow: 0 0 3px rgb(0, 0, 0); 
+        -webkit-text-stroke: 1px v.$secondaryBlockColor;
         font-size: 64px; 
         color: v.$primaryBlockColor; 
 

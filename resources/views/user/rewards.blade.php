@@ -3,12 +3,12 @@
          <div>
                 <h3 class="card__title">Current Streak: {{ $currentStreak }} / 7</h3>
             </div>
-        <div class="flex flex--row" style="justify-content: center; align-items: center; width: 100%;">
+        <div class="flex flex--row">
              
 
            
                 @foreach ($rewards as $day => $reward)
-                    <div class="flex__box flex__box--reward  @if ($day + 1 <= $currentStreak) flex__box--achievement @endif">
+                    <div class="flex__box flex__box--20  @if ($day + 1 <= $currentStreak) flex__box--achievement @endif">
                        
                         @if ($day + 1 <= $currentStreak) {{-- Ispravljen uslov --}}
                                <div class="wrapper" style="position: relative;">

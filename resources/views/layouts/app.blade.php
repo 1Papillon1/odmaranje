@@ -19,7 +19,9 @@
 
     <!-- VITE - Scripts -->
      @vite(['resources/css/app.scss', 'resources/js/app.js'])
-        
+
+    <script src="//unpkg.com/alpinejs" defer></script>
+   
      {{-- Livewire3 styles --}}
       @livewireStyles
     

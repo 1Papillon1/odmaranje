@@ -1,9 +1,9 @@
 <x-guest-layout>
     <!-- Landing Page -->
-    <div class="flex flex--home">
+    <div class="card card--layout">
     
         <!-- Title and Subtitle -->
-        <div class="container container--home flex--column">
+        <div class="container container--home">
             <h1 class="container__title">Welcome to RestApp</h1>
              <h4 class="logo logo--title">RestApp</h4>
 
@@ -12,7 +12,7 @@
         </div>
 
         <!-- Buttons -->
-        <div class="container container--home">
+        <div class="container container--row">
             
             <a href="{{ route('guest.login') }}" class="button button--primary">Sign in</a>
         

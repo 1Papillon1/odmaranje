@@ -58,6 +58,7 @@
     &__label {
         font-family: v.$secondaryFontFamily;
         color: v.$secondaryTextColor;
+        font-weight: 700;
         display: block;
         margin-bottom: 0.5rem;
     }
@@ -70,7 +71,7 @@
         font-family: v.$secondaryFontFamily;
         font-size: 1rem;
         color: v.$primaryTextColor;
-        background-color: v.$primaryBlockColor;
+        background-color: v.$secondaryBlockColor;
         border: 1px solid v.$secondaryBlockColor;
         border-radius: 4px;
         transition: border 0.3s ease;

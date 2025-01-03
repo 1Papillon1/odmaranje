@@ -17,7 +17,7 @@ Route::prefix('guest')->group(function () {
     Route::post('/register', [AuthController::class, 'register'])->name('guest.register-post');
 });
 
-Route::middleware(['auth'])->prefix('user')->group(function () {
+Route::prefix('user')->middleware('auth')->group(function () {
     Route::get('/', [UserController::class, 'index'])->name('user.dashboard');
     Route::get('/profile', [UserController::class, 'profile'])->name('user.profile');
     Route::get('/notifications', [UserController::class, 'notifications'])->name('user.notifications');
@@ -30,3 +30,4 @@ Route::middleware(['auth'])->prefix('user')->group(function () {
     Route::get('/faq', [UserController::class, 'faq'])->name('user.faq');
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout'); 
 });
+

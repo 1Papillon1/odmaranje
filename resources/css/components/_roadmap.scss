@@ -28,7 +28,7 @@
       margin-top: 5rem;
      
       border-radius: 50%;
-      width: 20vw;
+      width: 30vw;
 
       
       &__title {
@@ -57,7 +57,7 @@
 
     .year.right {
       text-align: left;
-      padding-left: 80%;
+      padding-left: 90%;
     }
 
     .year::before {
@@ -81,4 +81,35 @@
 
     .year ul li {
       margin: 5px 0;
+    }
+
+
+    @media screen and (min-width: 431px) and (max-width: 799px) {
+      .year {
+        width: 30vw;
+        
+      }
+      .year.right {
+        padding-left: 51vw;
+        
+      }
+      .year.left {
+        padding-right: 90%;
+        
+      }
+    }
+
+    @media screen and (max-width: 430px) {
+      .year {
+        width: 40vw;
+        
+      }
+      .year.right {
+        padding-left: 51vw;
+        
+      }
+      .year.left {
+        padding-right: 50vw;
+        
+      }
     }

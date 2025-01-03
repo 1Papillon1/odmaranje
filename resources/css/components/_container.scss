@@ -6,19 +6,36 @@
 
 .container {
     display: flex;
+    vertical-align: middle;
     justify-content: center;
-    align-items: center;
+    
+
 
     &--home {
-        margin-left: 20%;
+        margin-top: 20vh;
+        height: 30vh;
+        margin-left: 10%;
+        display: flex;
+        flex-direction: column;
+        
+        width: 80%;
 
 
     }
+
+    &--row {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        margin-left: 10%;
+        width: 80%;
+    }
+
     &__title {
         font-family: v.$secondaryFontFamily;
         color: v.$primaryTextColor;
         font-size: 32px;
-    
+        text-align: left;
         padding: 0;
         margin: 0;
         margin-bottom: 1.5rem;
@@ -102,8 +119,18 @@
             text-align: center;
         }
 
+        &--row {
+            margin-top: 40vh;
+            gap: 1rem;
+            width: 100%;
+            margin-left: 0;
+            flex-direction: column;
+        }
+
         &__title {
             display: none;
         }
+
+        
     }
 }

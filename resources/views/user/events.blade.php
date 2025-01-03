@@ -1,13 +1,8 @@
 <x-app-layout>
     <div class="card card--layout">
 
-        <div class="flex flex--col--2">
-         {{--    @foreach($events as $event)
-                            <div class="flex__box flex__box--event">
-                            // name description, start_time, end_time, reward        
-
-                            </div>
-            @endforeach --}}
+        <div class="flex flex--col--1">
+         
             @foreach($events as $event)
             <div class="flex__box flex__box--event">
                 <h3 class="card__title">{{$event->name}}</h3>

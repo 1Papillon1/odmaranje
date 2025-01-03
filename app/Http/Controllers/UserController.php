@@ -7,19 +7,19 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\UserActivity;
 use App\Models\User;
 use App\Models\Activity;
+use App\Models\Reward;
+use Illuminate\Contracts\View\View;
 use DB;
+use Log;
 
 class UserController extends Controller
 {
    
-     public function index()
+     public function index(): View
      {
 
-        
-
-         if (!Auth::check()) {
-             return redirect()->route('guest.home');
-         }
+        // Log user in
+        Log::info('User ' . auth()->id() . ' visited the index homepage.');
 
          $activeActivityId = UserActivity::where('user_id', auth()->id())
             ->where('status', 'active')
@@ -33,73 +33,58 @@ class UserController extends Controller
         
      }
 
-     public function notifications() 
+     public function notifications(): View
      {
-        if (!Auth::check()) {
-            return redirect()->route('guest.home');
-        }
+        
 
         return view('user.notifications');
      }
  
    
-     public function profile()
+     public function profile(): View
      {
-        if (!Auth::check()) {
-            return redirect()->route('guest.home');
-        }
+
+       
          return view('user.profile'); 
      }
 
-     public function coins()
+     public function coins(): View
      {
-        if (!Auth::check()) {
-            return redirect()->route('guest.home');
-        }
+       
          return view('user.coins'); 
      }
 
-     public function achievements()
+     public function achievements(): View
      {
-        if (!Auth::check()) {
-            return redirect()->route('guest.home');
-        }
+        
          return view('user.achievements'); 
      }
 
 
-     public function faq()
+     public function faq(): View
      {
-        if (!Auth::check()) {
-            return redirect()->route('guest.home');
-        }
+       
          return view('user.faq'); 
      }
 
-     public function calendar() 
+     public function calendar(): View 
      {
-        if (!Auth::check()) {
-            return redirect()->route('guest.home');
-        }
+        
          return view('user.calendar');
      }
 
-     public function events() 
+     public function events(): View 
      {
-        if (!Auth::check()) {
-            return redirect()->route('guest.home');
-        } 
+       
         $user = Auth::user();
         $events = DB::table('events')->get();
 
          return view('user.events', compact('user', 'events'));
      }
 
-     public function rewards() 
+     public function rewards(): View 
      {
-        if (!Auth::check()) {
-            return redirect()->route('guest.home');
-        }
+       
     
         // Fetch the current user
         $user = Auth::user();
@@ -119,11 +104,9 @@ class UserController extends Controller
         ]);
      }
 
-     public function roadmap() 
+     public function roadmap(): View 
      {
-        if (!Auth::check()) {
-            return redirect()->route('guest.home');
-        }
+       
          return view('user.roadmap');
      }
 
