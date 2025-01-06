@@ -4,9 +4,6 @@
     </div>
     <div class="flex flex--col--1">
 
-      
-
-
         @if ($suggested_activities)
         <div class="flex__box flex__box--tags">
             <h4 class="card__title card__title--secondary">Suggested Activities</h4>
@@ -22,11 +19,6 @@
         </div>
         @endif
 
-        
-      
-
-       
-        
 
         <div class="flex__box flex__box--primary">
             <span class="text--lg">Coin multiplier</span>
@@ -38,18 +30,7 @@
             <span class="text--sm">x{{ $energy_multiplier }}</span>
         </div> 
 
-         
-
-       
-
     </div>
-
-
-
-
-
-    
-        
 
 
 </div>

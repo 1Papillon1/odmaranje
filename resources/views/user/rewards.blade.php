@@ -10,7 +10,7 @@
                 @foreach ($rewards as $day => $reward)
                     <div class="flex__box flex__box--20  @if ($day + 1 <= $currentStreak) flex__box--achievement @endif">
                        
-                        @if ($day + 1 <= $currentStreak) {{-- Ispravljen uslov --}}
+                        @if ($day + 1 <= $currentStreak) 
                                <div class="wrapper" style="position: relative;">
                                 <img src="/images/tick.svg" alt="Completed" class="icon">
                                </div>

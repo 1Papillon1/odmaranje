@@ -86,7 +86,7 @@
 
         &--primary {
             display: flex;
-            align-items: center; /* Vertikalno poravnanje ikona i teksta */
+            align-items: center; 
             gap: 0.1rem;
             text-decoration: none;
             user-select: none;
@@ -150,20 +150,22 @@
 } 
 
 .tooltip {
-    display: block; // Sakriveno dok nije hover
-    background-color: v.$secondaryBlockColor; // Koristite sekundarnu boju bloka
-    color: v.$primaryTextColor; // Tekst boja
-    padding: 10px; // Razmak unutar kutije
-    border-radius: 5px; // Zaobljeni rubovi
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); // Lagana sjena
-    font-family: v.$secondaryFontFamily; // Font za tekst
-    font-size: 14px; // Veličina teksta
-    white-space: nowrap; // Sprječava prelamanje teksta
-    z-index: 1000; // Iznad ostalih elemenata
+    display: block; 
+    background-color: v.$secondaryBlockColor; 
+    color: v.$primaryTextColor; 
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+    font-family: v.$secondaryFontFamily; 
+    font-size: 14px; 
+    white-space: nowrap; 
+    z-index: 1000; 
 }
 
 
 
+
+// Media for screen
 
 @media screen and (max-width: 900px) {
     .navigation {
@@ -196,3 +198,4 @@
     }
 
 }
+

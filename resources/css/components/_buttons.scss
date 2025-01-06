@@ -54,7 +54,7 @@
     
     border-radius: 5px;
     cursor: pointer;
-    white-space: nowrap; /* Sprečava prelome teksta na dugmetu */
+    white-space: nowrap;
     &:hover {
         background-color: v.$secondaryBlockColor;
         box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.322), 0 3px 10px 0 rgba(0, 0, 0, 0.19);

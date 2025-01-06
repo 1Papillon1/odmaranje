@@ -18,7 +18,7 @@ class UserController extends Controller
      public function index(): View
      {
 
-        // Log user in
+  
         Log::info('User ' . auth()->id() . ' visited the index homepage.');
 
          $activeActivityId = UserActivity::where('user_id', auth()->id())
@@ -86,16 +86,16 @@ class UserController extends Controller
      {
        
     
-        // Fetch the current user
+       
         $user = Auth::user();
     
-        // Fetch current streak and daily rewards
+      
         $currentStreak = DB::table('daily_rewards')
             ->where('user_id', $user->id)
             ->orderBy('reward_date', 'desc')
             ->value('streak') ?? 0;
     
-        // Define rewards for each day
+     
         $rewards = [10, 20, 30, 40, 50, 60, 70];
     
         return view('user.rewards', [

@@ -40,11 +40,11 @@
         <div class="card__box card__box--stats">
             <h3 class="card__title">{{ $activity->name }}</h3>
             <p class="card__text">{{ $activity->description }}</p>
-            <p class="card__text" wire:poll.60s="tick">Remaining: (min) {{ $remaining_time }} / {{ $activity->duration }}</p>
+            <p class="card__text" wire:poll.60s="tick">Remaining: (min) {{ $remaining_time }} / {{ $activityDuration }}</p>
         </div>
     </div>
 
-    <!-- Progress bar showing the remaining time -->
+
     <div class="progress">
         <div class="progress__bar" style="width: {{ $progress }}%">
         </div>

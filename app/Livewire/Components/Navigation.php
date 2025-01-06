@@ -8,10 +8,8 @@ use App\Models\Notifications;
 class Navigation extends Component
 {
    
-
-     // dropdown open toggle
-     public $dropdownOpen = false; // Za dropdown
-     public $isOpen = false;       // Za hamburger meni
+     public $dropdownOpen = false; 
+     public $isOpen = false;       
      public $notifications;
   
         

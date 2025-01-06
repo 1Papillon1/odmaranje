@@ -79,9 +79,9 @@
 }
 
 .progress-bar-container {
-    width: 50%; /* Širina progres bara */
-    height: 20px; /* Visina progres bara */
-    background-color: #292929; /* Siva pozadina */
+    width: 50%; 
+    height: 20px; 
+    background-color: #292929; 
     padding: 5px;
     justify-content: left;
     align-items: left;
@@ -93,8 +93,8 @@
 }
 
 .progress-bar {
-    background-color: #727171; /* Zelena boja */
-    transition: width 0.5s ease-in-out; /* Glatki prijelaz */
+    background-color: #727171; 
+    transition: width 0.5s ease-in-out; 
     height: 100%;
     border-radius: 10px;
     display: flex;
@@ -120,7 +120,7 @@
         }
 
         &--row {
-            margin-top: 40vh;
+            margin-top: 33vh;
             gap: 1rem;
             width: 100%;
             margin-left: 0;

@@ -1,5 +1,5 @@
 /*
-card.scss
+    card.scss
 */
 
 @use '../base/variables' as v;
@@ -23,7 +23,7 @@ card.scss
         display: block;
     }
 
-    // for login and register
+  
     &--full {
         
         width: 20vw;
@@ -35,10 +35,10 @@ card.scss
     }
 
     &--layout {
-        margin-left: 2%;
-        width: 96%;
+        margin: 2%;
+        width: 96vw;
         min-height: 96vh;
-        height: auto;  
+        height: 96vh;
         
         box-sizing: border-box;
         padding: 2rem 1rem;
@@ -157,7 +157,6 @@ card.scss
 
     &__group {
         position: absolute;
-        // right position top of parent
         display: flex;
         flex-direction: column;
         gap: 1rem;
@@ -176,9 +175,7 @@ card.scss
         justify-content: flex-end;
         align-items: center;
 
-        // &--text
-        // %--energy (icon)
-        // center text and icon so they in the same row and color
+     
         &__text {
             text-align: center;
             color: v.$primaryTextColor;
@@ -208,15 +205,15 @@ card.scss
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        opacity: 0; // Neaktivne stavke su nevidljive
+        opacity: 0; 
         transition: opacity 0.6s ease, transform 0.6s ease;
-        z-index: 0; // Niži z-index za neaktivne stavke
+        z-index: 0; 
     }
     
     &__item--active {
-        opacity: 1; // Aktivna stavka je vidljiva
-        z-index: 1; // Viši z-index za aktivnu stavku
-        transform: translate(-50%, -50%) scale(1.1); // Fokus na aktivnu stavku
+        opacity: 1; 
+        z-index: 1; 
+        transform: translate(-50%, -50%) scale(1.1); 
     }
 
     &__title {
@@ -231,15 +228,15 @@ card.scss
         text-align: center;
     }
     &__nav {
-        position: absolute; // Da se elementi pozicioniraju u odnosu na slider
-        top: 50%; // Centriranje vertikalno
-        left: 0; // Početak na levom rubu slidera
-        width: 100%; // Proširuje se po celoj širini
+        position: absolute; 
+        top: 50%; 
+        left: 0;
+        width: 100%; 
         display: flex;
-        justify-content: space-between; // Strelice na suprotnim krajevima
+        justify-content: space-between; 
         
         align-items: center;
-        z-index: 5; // Da budu iznad slider__items
+        z-index: 5; 
 
         &__button {
          
@@ -256,7 +253,7 @@ card.scss
             }
 
             &:hover {
-                opacity: 0.8; // Efekat na hover
+                opacity: 0.8; 
                 cursor: pointer;
             }
 
@@ -267,7 +264,7 @@ card.scss
     }
 
     &__icon {
-        width: 48px; // Veličina ikona
+        width: 48px; 
         height: auto;
         
         &--right {
@@ -279,6 +276,9 @@ card.scss
     
 
 }
+
+
+// Media for screen
 
 @media only screen and (min-width: 1201px) and (max-width: 1600px) {
     .card {
@@ -309,7 +309,7 @@ card.scss
     }
 } 
 
-// media for mobile phones set width to 100%
+
 @media only screen and (max-width: 600px) {
     .card {
         width: 96vw;
@@ -319,7 +319,9 @@ card.scss
             margin: 2vh 2vw;
         }
         &--layout {
-            width: 96%;
+
+            width: 96vw;
+            height: 96vw;
         }
         &__form {
             margin: 0;

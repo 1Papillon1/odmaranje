@@ -8,7 +8,7 @@
     background-color: v.$primaryBlockColor;
     width: 20%;
 
-    // for login and register
+    
     &--full {
         padding: 2rem;
         background-color: inherit;
@@ -141,11 +141,11 @@
 
 .input-group {
     display: flex;
-    align-items: center; /* Poravnaj unos i dugme po vertikali */
-    gap: 0.5rem; /* Razmak između inputa i dugmeta */
+    align-items: center; 
+    gap: 0.5rem; 
     & .form__input {
-        flex: 1; /* Input zauzima preostali prostor */
-        padding: 0.5rem; /* Unutrašnji razmak */
+        flex: 1; 
+        padding: 0.5rem;
         border: 1px solid #ccc;
         border-radius: 5px;
     }
@@ -171,7 +171,9 @@
     
 }
 
-// media for mobile phones set width to 100%
+
+// Media for screen
+
 @media only screen and (max-width: 600px) {
     .form {
         width: 96vw;

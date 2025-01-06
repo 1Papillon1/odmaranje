@@ -31,7 +31,7 @@ class ActivityStart extends Component
                 'is_read' => false,
             ]);
         } catch (\Exception $e) {
-            // Handle the exception
+          
             Log::error('Error sending notification: ' . $e->getMessage());
         }
     }
@@ -40,20 +40,36 @@ class ActivityStart extends Component
     public $currentIndex = 0;
     public $activeActivityId;
     public $restBucksChange = 0;
+    public $sleepDuration = 0;
     public $user;
     
     public function mount()
     {
         $this->activities = Activity::all(); 
+      
         $this->user = User::find(auth()->id()); 
         
+    
+
+      
+       
+      
+
         $this->currentIndex = $this->activities->search(function ($activity) {
             return $activity->id === $this->activeActivityId;
         });
 
        
+  
+       
+
+       
+
+       
        
     }
+
+    
 
    
 
@@ -70,13 +86,15 @@ class ActivityStart extends Component
                 } else if ($activity->type == 'subtract' && $user->energy - $activity->energy_change < 0) {
                     session()->flash('message', 'You cannot start this activity, because your energy is too low');
                 } else {
+                    
+
                     try {
                         DB::table('user_activities')->insert([
                             'user_id' => $user->id,
                             'activity_id' => $activity->id,
                             'created_at' => Carbon::now(),
                             'updated_at' => Carbon::now(),
-                            'remaining_time' => $activity->duration,
+                            'remaining_time' => $this->sleepDuration ?? $activity->duration,
                             'status' => 'active',
                         ]);
                     } catch (\Exception $e) {
@@ -125,6 +143,21 @@ class ActivityStart extends Component
             if ($activity->type == 'add') {
                 if ($activity->name == 'Sleep') {
                     $activity->energy_change = 96 - $user->energy;
+
+                   
+                    $maxEnergy = 96;
+
+            
+                    $currentEnergy = auth()->user()->energy;
+
+                   
+                    $energyToRecover = $maxEnergy - $currentEnergy;
+
+                   
+                    $minutesPer10Energy = 60; 
+                    $durationMinutes = ($energyToRecover / 10) * $minutesPer10Energy;
+
+                    $this->sleepDuration = $durationMinutes;
                 }
     
                 try {
@@ -151,6 +184,8 @@ class ActivityStart extends Component
     }
 
 
+
+
     
     public function rotateRight()
     {
@@ -164,10 +199,15 @@ class ActivityStart extends Component
 
             $this->currentIndex = ($this->currentIndex + 1) % count($this->activities);
             $this->activeActivityId = $this->activities[$this->currentIndex]->id;
+
+
+        
+            
            
 
             try {
                 $this->calculateRestBucks($this->activeActivityId);
+       
             } catch (\Exception $e) {
                 Log::error('Error in calculateRestBucks during rotateRight', ['message' => $e->getMessage()]);
             }
@@ -187,8 +227,14 @@ class ActivityStart extends Component
             $this->currentIndex = ($this->currentIndex - 1 + count($this->activities)) % count($this->activities);
             $this->activeActivityId = $this->activities[$this->currentIndex]->id;
 
+            $activity = Activity::find($this->activeActivityId);
+
+           
+            
+
             try {
                 $this->calculateRestBucks($this->activeActivityId);
+              
             } catch (\Exception $e) {
                 Log::error('Error in calculateRestBucks during rotateLeft', ['message' => $e->getMessage()]);
             }
@@ -196,6 +242,8 @@ class ActivityStart extends Component
             Log::error('Error in rotateLeft method', ['message' => $e->getMessage()]);
         }
     }
+
+
 
     public function render()
     {

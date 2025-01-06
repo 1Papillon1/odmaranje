@@ -17,9 +17,10 @@ class ActivityTimer extends Component
     public $user_activity;
     public $user;
     public $activity;
-    public $remaining_time; // Remaining time in minutes
-    public $progress; // Progress bar width
+    public $remaining_time; 
+    public $progress;
     public $restBucksChange;
+    public $activityDuration = 0;
 
 
     protected function unlockAchievement($user, $achievementId, $message, $type = 'custom_message')
@@ -28,7 +29,7 @@ class ActivityTimer extends Component
 
         $hasAchievement = UserAchievement::where('achievement_id', $achievementId)->exists();
         if (!$hasAchievement) {
-            /* $user->achievements()->attach($achievementId); */
+     
             UserAchievement::create([
                 'user_id' => $user->id,
                 'achievement_id' => $achievementId,
@@ -66,11 +67,30 @@ class ActivityTimer extends Component
 
         $this->activity = Activity::find($this->user_activity->activity_id);
        
-        
+
+       
+
         if ($this->activity->name == 'Sleep') {
             $this->activity->energy_change = 96 - $this->user->energy;
-        }
 
+            $maxEnergy = 96;
+
+    
+            $currentEnergy = auth()->user()->energy;
+
+           
+            $energyToRecover = $maxEnergy - $currentEnergy;
+
+           
+            $minutesPer10Energy = 60; 
+            $durationMinutes = ($energyToRecover / 10) * $minutesPer10Energy;
+
+            $this->activityDuration = $durationMinutes;
+        } else {
+            $this->activityDuration = $this->activity->duration;
+        }
+        
+        
        
       
        $this->calculateRestBucks($this->activity->id);
@@ -119,24 +139,28 @@ class ActivityTimer extends Component
 
    
 
-    // Update remaining time and progress
+    
 
     public function updateRemainingTime()
     {
         if ($this->user_activity) {
+
+            
+
+
             $createdAt = Carbon::parse($this->user_activity->created_at);
             $totalDurationMinutes = $this->user_activity->remaining_time;
             $elapsedMinutes = $createdAt->diffInMinutes(Carbon::now());
     
-            // Count remaning time
+           
             $this->remaining_time = round(max(0, $totalDurationMinutes - $elapsedMinutes), 0);
     
-            // Count the progress
+           
             $this->progress = ($totalDurationMinutes > 0)
                 ? (($this->remaining_time / $totalDurationMinutes) * 100)
                 : 0;
     
-            // Time completed
+          
             if ($this->remaining_time <= 0 && $this->user_activity->status !== 'completed') {
                 $activity = Activity::find($this->user_activity->activity_id);
                 $energy_change = $activity->energy_change;
@@ -159,13 +183,15 @@ class ActivityTimer extends Component
                 } else {
                     $user->update(['energy' => max(0, $user->energy - $energy_change)]);
                 }
+
+
+                $this->user->updateXp($energy_change);
     
                 $this->user_activity->update(['status' => 'completed']);
     
-                // Rest activities
+         
                 $restActivities = ['Meditation', 'Power Nap', 'Sleep'];
     
-                // Achievement 2
                 if (in_array($activity->name, $restActivities)) {
                     $this->unlockAchievement(
                         $user,
@@ -174,10 +200,10 @@ class ActivityTimer extends Component
                     );
                 }
 
-                // Achievement 3
-                $totalRestTime = UserActivity::where('user_id', $user->id) // Filtriraj aktivnosti korisnika
-                ->whereIn('activity_id', Activity::whereIn('name', $restActivities)->pluck('id')) // Filtriraj aktivnosti po imenima
-                ->where('status', 'completed') // Samo završene aktivnosti
+              
+                $totalRestTime = UserActivity::where('user_id', $user->id) 
+                ->whereIn('activity_id', Activity::whereIn('name', $restActivities)->pluck('id')) 
+                ->where('status', 'completed') 
                 ->sum(DB::raw('TIMESTAMPDIFF(MINUTE, created_at, updated_at)'));
 
                 if ($totalRestTime >= 60) {
@@ -188,7 +214,7 @@ class ActivityTimer extends Component
                     );
                 }
 
-                // Achievement 4
+             
                 $allActivitiesCompleted = Activity::all()->every(function ($activity) use ($user) {
                     return $user->completedAllActivities();
                 });
@@ -201,7 +227,7 @@ class ActivityTimer extends Component
                     );
                 }
 
-                // Achievement 5
+               
                 if ($totalRestTime >= 600) {
                     $this->unlockAchievement(
                         $user,
@@ -210,7 +236,7 @@ class ActivityTimer extends Component
                     );
                 }
 
-                // Achievement 6
+             
                 if ($totalRestTime >= 6000) {
                     $this->unlockAchievement(
                         $user,
@@ -219,7 +245,7 @@ class ActivityTimer extends Component
                     );
                 }
 
-                // Achievement 7
+              
                 if ($user->rest_bucks >= 1000) {
                     $this->unlockAchievement(
                         $user,
@@ -229,7 +255,7 @@ class ActivityTimer extends Component
                     );
                 }
 
-                // Achievement 8
+              
                 if ($user->rest_bucks >= 10000) {
                     $this->unlockAchievement(
                         $user,

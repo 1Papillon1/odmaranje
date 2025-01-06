@@ -20,18 +20,18 @@ class UserStats extends Component
     {
         $this->user = User::find(auth()->id());
 
-        // all activities
+      
         $this->user_activities = $this->user->completedActivitiesCountWithName;
         
-        // that user_activities. Get activity name and count
+      
         $this->activities = $this->user_activities
         ->groupBy(function ($activity) {
-            return $activity->activity->name;  // Grupisanje po imenu aktivnosti
+            return $activity->activity->name;  
         })
         ->map(function ($group) {
             return [
-                'name' => $group->first()->activity->name, // Uzmi ime iz prve aktivnosti u grupi
-                'count' => $group->count(),  // Broj aktivnosti u grupi
+                'name' => $group->first()->activity->name, 
+                'count' => $group->count(),  
             ];
         });
 

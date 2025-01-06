@@ -2,7 +2,7 @@
     
     <div class="card__box">
         <div class="slider">
-            <!-- Rotating Activities -->
+            
 
 
         
@@ -82,7 +82,7 @@
         <h3 class="card__title">{{ $activities[$currentIndex]->name }}</h3>
         <p class="card__text">{{ $activities[$currentIndex]->description }}</p>
        
-        <p class="card__text">Duration: {{ $activities[$currentIndex]->duration }} minutes</p>
+        <p class="card__text">Duration: {{  $activities[$currentIndex]->name == "Sleep" ? $sleepDuration : $activities[$currentIndex]->duration }} minutes</p>
         <button class="card__button" wire:click="startActivity">
             Start
         </button>

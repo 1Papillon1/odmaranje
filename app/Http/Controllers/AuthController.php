@@ -34,10 +34,10 @@ class AuthController extends Controller
         return view('authorization.login');
     }
 
-    // Obrada login zahtjeva
+
     public function login(Request $request)
     {
-        // Validacija inputa
+     
         $credentials = $request->validate([
             'email' => 'required|email',
             'password' => 'required',
@@ -112,11 +112,11 @@ if (User::where('email', $request->email)->exists()) {
     return back()->withErrors(['password' => 'The password is incorrect.'])->withInput();
 }
     
-        // Ako korisnik s ovim e-mailom ne postoji
+
         return back()->withErrors(['email' => 'The email does not exist.'])->withInput();
     }
 
-    // Prikaz registracijske forme
+ 
     public function showRegisterForm()
     {
         if (Auth::check()) {
@@ -126,7 +126,7 @@ if (User::where('email', $request->email)->exists()) {
         return view('authorization.register');
     }
 
-    // Obrada registracije
+    
     public function register(Request $request)
     {
         $request->validate([
@@ -152,7 +152,7 @@ if (User::where('email', $request->email)->exists()) {
             'password' => Hash::make($request->password),
         ]);
     
-        // Attach default role and achievement
+     
         DB::table('user_role')->insert([
             'user_id' => $user->id,
             'role_id' => 1,
@@ -166,7 +166,7 @@ if (User::where('email', $request->email)->exists()) {
         return redirect()->route('user.profile')->with('success', 'Welcome! Your account has been created.');
     }
 
-    // Logout korisnika
+  
     public function logout(Request $request)
     {
         Auth::logout();

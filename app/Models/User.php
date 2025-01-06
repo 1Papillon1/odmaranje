@@ -182,8 +182,48 @@ public function getSuggestedActivities()
      public function Notifications() {
         return $this->hasMany(Notifications::class);
      }
-    
 
+     public function calculateLevelMultiplier()
+     {
+         $userLevel = $this->level; // Trenutni level korisnika
+         
+
+         // veći level - veći multiplikator (rast za 0.1 na svakom levelu)
+         $levelMultiplier = $userLevel + 0.1;
+
+         return round($levelMultiplier, 2);
+     }
+
+     public function totalMultiplier() {
+        $energyMultiplier = $this->calculateEnergyMultiplier();
+        $balanceMultiplier = $this->calculateMultiplier();
+        $levelMultiplier = $this->calculateLevelMultiplier();
+        return round($energyMultiplier * $balanceMultiplier * $levelMultiplier, 2);
+     }
+
+     public function updateXp($xp)
+     {
+        
+         $this->xp += $xp;
+     
+       
+         $nextLevelXp = 100; 
+         $levelThreshold = $this->level;
+     
+      
+         if ($this->xp >= $nextLevelXp) {
+             
+             $this->xp -= $nextLevelXp;
+             $this->level += 1;
+     
+            
+             $levelThreshold++;
+             $nextLevelXp = 100 * pow(1.25, $levelThreshold); 
+         }
+     
+       
+         $this->save();
+     }
     
     
 

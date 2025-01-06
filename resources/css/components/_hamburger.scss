@@ -18,7 +18,7 @@
         display: flex;
         flex-direction: column;
     
-        // 3 span elements line
+       
         &__line {
             display: block;
             width: 100%;
@@ -31,6 +31,9 @@
     }
     
 }
+
+
+// Media for screen
 
 @media screen and (max-width: 900px) {
     .hamburger {
